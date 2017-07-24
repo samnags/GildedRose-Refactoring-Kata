@@ -55,6 +55,7 @@ class GildedRose
       when 'Backstage passes to a TAFKAL80ETC concert'
         reduce_sell_date(item)
         back_stage_pass_updater(item)
+        check_negative_and_over_50(item)
       when 'Conjured Mana Cake'
         reduce_sell_date(item)
         conjured_update(item)

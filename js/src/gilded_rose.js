@@ -53,6 +53,7 @@ class Shop {
       case 'Backstage passes to a TAFKAL80ETC concert':
         this.reduceSellDate(item)
         backStagePassUpdater(item);
+        this.checkNegativeAndOver50(item)
         break;
       case 'Conjured Mana Cake':
         this.reduceSellDate(item)
