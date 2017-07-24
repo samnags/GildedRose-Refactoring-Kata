@@ -46,6 +46,7 @@ class Shop {
       case 'Aged Brie':
         this.reduceSellDate(item)
         agedBrieUpdater(item);
+        this.checkNegativeAndOver50(item)
         break;
       case 'Sulfuras, Hand of Ragnaros':
         sulfurasUpdater(item);
@@ -61,8 +62,8 @@ class Shop {
         this.checkNegativeAndOver50(item);
         break;
       default:
-        this.checkNegativeAndOver50(item);
         this.standardUpdate(item);
+        this.checkNegativeAndOver50(item);
         break;
     }
   }
@@ -87,9 +88,9 @@ function sulfurasUpdater(item){
 function backStagePassUpdater(item) {
   if (item.sellIn < 0) {
     item.quality = 0
-  } else if (item.sellIn <= 5) {
+  } else if (item.sellIn < 5) {
     item.quality += 3
-  } else if (item.sellIn <= 10) {
+  } else if (item.sellIn < 10) {
     item.quality += 2
   }
   else {
