@@ -12,6 +12,9 @@
 
     $('body').append('<p>OMGHAI!</p>');
 
+    // var shop = new Shop;
+    // var items = shop.items
+
     items.push(new Item('+5 Dexterity Vest', 10, 20));
     items.push(new Item('Aged Brie', 2, 0));
     items.push(new Item('Elixir of the Mongoose', 5, 7));
@@ -28,7 +31,7 @@
     for (var i = 0; i < days; i++) {
       showHeaderFor(i);
       showItemsFor(i);
-      update_quality();
+      shop.updateQuality();
     }
 
     function showHeaderFor(day) {
