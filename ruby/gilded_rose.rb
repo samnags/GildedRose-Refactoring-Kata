@@ -10,6 +10,10 @@ class GildedRose
     end
   end
 
+  def standard_degrade(item)
+    item.quality -= 1
+  end
+
   def double_degrade(item)
     item.quality -= 2
   end
@@ -23,12 +27,12 @@ class GildedRose
   end
 
   def conjured_update(item)
-    item.quality -= 2
+    double_degrade(item)
   end
 
   def standard_update(item)
     reduce_sell_date(item)
-    item.sell_in < 0 ? item.quality -= 2 : item.quality -= 1
+    item.sell_in < 0 ? double_degrade(item) : standard_degrade(item)
   end
 
   def reduce_sell_date(item)
@@ -45,6 +49,7 @@ class GildedRose
       when 'Aged Brie'
         reduce_sell_date(item)
         aged_brie_updater(item)
+        check_negative_and_over_50(item)
       when 'Sulfuras, Hand of Ragnaros'
         sulfuras_updater(item)
       when 'Backstage passes to a TAFKAL80ETC concert'
@@ -55,9 +60,9 @@ class GildedRose
         conjured_update(item)
         check_negative_and_over_50(item)
       else
-        check_negative_and_over_50(item)
         standard_update(item)
-      end
+        check_negative_and_over_50(item)
+    end
   end
 
   def aged_brie_updater(item)
@@ -71,12 +76,12 @@ class GildedRose
   def back_stage_pass_updater(item)
     if item.sell_in < 0
       item.quality = 0
-    elsif item.sell_in <= 5
+    elsif item.sell_in < 5
       item.quality += 3
-    elsif item.sell_in <= 10
+    elsif item.sell_in < 10
       item.quality += 2
     else
-      item.quality += 2
+      item.quality += 1
     end
   end
 
