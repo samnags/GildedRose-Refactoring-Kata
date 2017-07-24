@@ -25,7 +25,6 @@ class Shop {
 
   conjuredUpdate(item) {
     item.quality -= 2
-    debugger
   }
 
   standardUpdate(item) {
@@ -35,13 +34,11 @@ class Shop {
 
   reduceSellDate(item) {
     item.sellIn -= 1
-    debugger
   }
 
   checkNegativeAndOver50(item){
     this.checkNegative(item)
     this.checkOver50(item)
-    debugger
   }
 
   determineItem(item) {
@@ -49,15 +46,19 @@ class Shop {
       case 'Aged Brie':
         agedBrieUpdater(item);
         this.reduceSellDate(item)
+        break;
       case 'Sulfuras, Hand of Ragnaros':
         sulfurasUpdater(item);
+        break;
       case 'Backstage passes to a TAFKAL80ETC concert':
         backStagePassUpdater(item);
         this.reduceSellDate(item)
+        break;
       case 'Conjured':
-        this.checkNegativeAndOver50(item);
-        this.reduceSellDate(item)
         this.conjuredUpdate(item);
+        this.reduceSellDate(item)
+        this.checkNegativeAndOver50(item);
+        break;
       default:
         this.checkNegativeAndOver50(item);
         this.standardUpdate(item);
