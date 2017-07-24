@@ -16,7 +16,7 @@ class Shop {
   }
 
   checkNegative(item) {
-    item.quality < 0 ? item.quality = 1 : item.quality
+     item.quality < 0 ? item.quality = 0 : item.quality
   }
 
   checkOver50(item) {
@@ -28,8 +28,8 @@ class Shop {
   }
 
   standardUpdate(item) {
-    item.sellIn < 0 ? item.quality -= 2 : item.quality -= 1
     this.reduceSellDate(item)
+    item.sellIn < 0 ? item.quality -= 2 : item.quality -= 1
   }
 
   reduceSellDate(item) {
@@ -37,31 +37,32 @@ class Shop {
   }
 
   checkNegativeAndOver50(item){
-    this.checkNegative(item)
     this.checkOver50(item)
+    this.checkNegative(item)
   }
 
   determineItem(item) {
     switch (item.name) {
       case 'Aged Brie':
-        agedBrieUpdater(item);
         this.reduceSellDate(item)
+        agedBrieUpdater(item);
         break;
       case 'Sulfuras, Hand of Ragnaros':
         sulfurasUpdater(item);
         break;
       case 'Backstage passes to a TAFKAL80ETC concert':
+        this.reduceSellDate(item)
         backStagePassUpdater(item);
-        this.reduceSellDate(item)
         break;
-      case 'Conjured':
-        this.conjuredUpdate(item);
+      case 'Conjured Mana Cake':
         this.reduceSellDate(item)
+        this.conjuredUpdate(item);
         this.checkNegativeAndOver50(item);
         break;
       default:
         this.checkNegativeAndOver50(item);
         this.standardUpdate(item);
+        break;
     }
   }
 
@@ -75,22 +76,22 @@ class Shop {
 
 
 function agedBrieUpdater(item){
-  item.quality += 1
+  item.sellIn < 0 ? item.quality += 2 : item.quality += 1
 }
 
 function sulfurasUpdater(item){
-  item.sellIn = false
   item.quality = 80
 }
 
 function backStagePassUpdater(item) {
-  if (item.sellIn < 5) {
-    item.quality += 3
-  } else if (item.sellIn < 10) {
-    item.quality += 2
-  } else if (item.sellIn == 0) {
+  if (item.sellIn < 0) {
     item.quality = 0
-  } else {
+  } else if (item.sellIn <= 5) {
+    item.quality += 3
+  } else if (item.sellIn <= 10) {
+    item.quality += 2
+  }
+  else {
     item.quality += 1
   }
 }
