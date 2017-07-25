@@ -41,6 +41,13 @@ class Shop {
     this.checkNegative(item)
   }
 
+  updateQuality() {
+    for (var i = 0; i < this.items.length; i++) {
+      this.determineItem(this.items[i])
+    }
+    return this.items
+  }
+
   determineItem(item) {
     switch (item.name) {
       case 'Aged Brie':
@@ -68,14 +75,7 @@ class Shop {
     }
   }
 
-  updateQuality() {
-    for (var i = 0; i < this.items.length; i++) {
-      this.determineItem(this.items[i])
-    }
-    return this.items
-  }
 }
-
 
 function agedBrieUpdater(item){
   item.sellIn < 0 ? item.quality += 2 : item.quality += 1
