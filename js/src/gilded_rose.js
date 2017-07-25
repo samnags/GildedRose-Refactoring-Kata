@@ -63,7 +63,7 @@ class Shop {
         backStagePassUpdater(item);
         this.checkNegativeAndOver50(item)
         break;
-      case 'Conjured Mana Cake':
+      case item.name.includes("Conjured"):
         this.reduceSellDate(item)
         this.conjuredUpdate(item);
         this.checkNegativeAndOver50(item);
