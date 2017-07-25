@@ -77,6 +77,7 @@ class Shop {
 
 }
 
+
 function agedBrieUpdater(item){
   item.sellIn < 0 ? item.quality += 2 : item.quality += 1
 }
